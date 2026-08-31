@@ -43,12 +43,12 @@ costo adicional.
 Ejemplos:
 
 
-Visual Studio Code
-Git
-GitHub
-DBeaver u otro cliente de base de datos
-Navegador web
-Terminal / PowerShell
+- Visual Studio Code
+- Git
+- GitHub
+- DBeaver u otro cliente de base de datos
+- Navegador web
+- Terminal / PowerShell
 
 
 Algunas herramientas de administración de base de datos pueden disponer de
@@ -58,8 +58,8 @@ dependencia de ejecución del sistema.
 La aplicación puede administrarse utilizando herramientas gratuitas como:
 
 
-psql
-pgAdmin
+- psql
+- pgAdmin
 
 
 ---
@@ -69,12 +69,14 @@ pgAdmin
 El desarrollo puede ejecutarse completamente en una computadora local.
 
 
+```text
 Equipo del desarrollador
         |
         ├── Laravel
         ├── PostgreSQL
         ├── Node.js
         └── Navegador
+```
 
 
 ### Costo adicional de infraestructura
@@ -96,6 +98,7 @@ Server.
 Ejemplo:
 
 
+```text
 Computadora física
       |
       v
@@ -104,6 +107,7 @@ Máquina Virtual Ubuntu
       ├── Laravel
       ├── PostgreSQL
       └── Servidor Web
+```
 
 
 Si se utilizan recursos existentes, el costo adicional es:
@@ -159,10 +163,10 @@ La arquitectura propuesta inicialmente requiere únicamente:
 que contenga:
 
 
-Servidor Web
-PHP / Laravel
-Livewire
-PostgreSQL
+- Servidor Web
+- PHP / Laravel
+- Livewire
+- PostgreSQL
 
 
 El costo dependerá del proveedor seleccionado, región, recursos asignados,
@@ -265,9 +269,9 @@ Para producción podría ser recomendable utilizar almacenamiento externo.
 Ejemplos:
 
 
-Object Storage
-Otro servidor
-Servicio administrado de respaldos
+- Object Storage
+- Otro servidor
+- Servicio administrado de respaldos
 
 
 El costo dependerá del volumen almacenado y de la frecuencia de retención.
@@ -296,10 +300,10 @@ requerimiento funcional obligatorio.
 ## 14. Escenario 1 - Desarrollo
 
 
-Aplicación local
-PostgreSQL local
-Git
-Herramientas Open Source
+- Aplicación local
+- PostgreSQL local
+- Git
+- Herramientas Open Source
 
 
 ### Costo adicional estimado
@@ -313,10 +317,10 @@ $0
 ## 15. Escenario 2 - Evaluación / demostración
 
 
-Ubuntu Server en máquina virtual local
-PostgreSQL local
-Aplicación Laravel
-Exposición temporal opcional
+- Ubuntu Server en máquina virtual local
+- PostgreSQL local
+- Aplicación Laravel
+- Exposición temporal opcional
 
 
 ### Costo adicional estimado
@@ -332,10 +336,10 @@ si se utilizan recursos ya disponibles y herramientas gratuitas.
 ## 16. Escenario 3 - Producción básica
 
 
-1 servidor público
-1 dominio opcional
-HTTPS gratuito
-PostgreSQL en el mismo servidor
+- 1 servidor público
+- 1 dominio opcional
+- HTTPS gratuito
+- PostgreSQL en el mismo servidor
 
 
 ### Costos
@@ -358,15 +362,15 @@ de bajo volumen.
 Si el sistema incrementara considerablemente su carga, podrían incorporarse:
 
 
-Servidor dedicado para PostgreSQL
-Balanceador de carga
-Múltiples servidores Laravel
-Redis
-Workers
-Almacenamiento externo
-CDN
-Sistema de respaldos
-Monitoreo especializado
+- Servidor dedicado para PostgreSQL
+- Balanceador de carga
+- Múltiples servidores Laravel
+- Redis
+- Workers
+- Almacenamiento externo
+- CDN
+- Sistema de respaldos
+- Monitoreo especializado
 
 
 Cada nuevo componente incrementaría el costo operativo.
@@ -414,10 +418,10 @@ Por ejemplo, no se incluyeron inicialmente:
 La incorporación de estos componentes sin una necesidad medible aumentaría:
 
 
-Costo
-Complejidad
-Mantenimiento
-Puntos de falla
+- Costo
+- Complejidad
+- Mantenimiento
+- Puntos de falla
 
 
 sin proporcionar un beneficio proporcional para el alcance actual.

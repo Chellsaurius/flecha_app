@@ -22,6 +22,7 @@ volumen esperado del sistema.
 ## 2. Arquitectura física propuesta
 
 
+```text
                  Usuario Web
                      |
                      | HTTPS
@@ -39,12 +40,14 @@ volumen esperado del sistema.
             │        v            │
             │    PostgreSQL       │
             └─────────────────────┘
+```
 
 
 Aunque los componentes se encuentren físicamente en el mismo servidor, se
 mantiene una separación lógica entre:
 
 
+```text
 Frontend
    |
 Livewire
@@ -52,11 +55,13 @@ Livewire
 Laravel
    |
 PostgreSQL
+```
 
 
 y:
 
 
+```text
 Cliente API
    |
 Laravel Sanctum
@@ -66,6 +71,7 @@ Controllers
 Laravel
    |
 PostgreSQL
+```
 
 
 ---
@@ -75,18 +81,19 @@ PostgreSQL
 La interfaz frontend utiliza:
 
 
-Livewire
-Flux
-Tailwind CSS
-Vite
+- Livewire
+- Flux
+- Tailwind CSS
+- Vite
 
 
 Livewire se ejecuta dentro de la misma aplicación Laravel.
 
 Los recursos CSS y JavaScript se compilan utilizando:
 
-bash
+```bash
 npm run build
+```
 
 
 El resultado generado por Vite es servido como contenido estático por el
@@ -103,11 +110,11 @@ Node.js solamente es necesario durante el proceso de construcción de los assets
 El backend utiliza:
 
 
-PHP 8.3+
-Laravel 13
-Eloquent ORM
-Laravel Sanctum
-Laravel Fortify
+- PHP 8.3+
+- Laravel 13
+- Eloquent ORM
+- Laravel Sanctum
+- Laravel Fortify
 
 
 El servidor web debe tener como Document Root únicamente:
@@ -129,13 +136,14 @@ Laravel.
 
 Ejemplo de conexión:
 
-env
+```env
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_DATABASE=flechaDB
 DB_USERNAME=usuario_aplicacion
 DB_PASSWORD=********
+```
 
 
 Se recomienda utilizar un usuario específico para la aplicación en lugar de
@@ -161,7 +169,7 @@ Runtime:
 PHP 8.3 o superior
 
 Base de datos:
-PostgreSQL
+- PostgreSQL
 
 Dependencias:
 Composer
@@ -177,23 +185,24 @@ Git
 Extensiones PHP principales requeridas por el proyecto:
 
 
-pdo_pgsql
-pgsql
-curl
-fileinfo
-mbstring
-openssl
-tokenizer
-xml
-ctype
-json
-zip
+- pdo_pgsql
+- pgsql
+- curl
+- fileinfo
+- mbstring
+- openssl
+- tokenizer
+- xml
+- ctype
+- json
+- zip
 
 
 La lista definitiva puede verificarse mediante:
 
-bash
+```bash
 composer check-platform-reqs
+```
 
 
 ---
@@ -204,15 +213,17 @@ El código fuente se obtiene desde el repositorio Git.
 
 Ejemplo:
 
-bash
+```bash
 git clone <URL_DEL_REPOSITORIO>
 cd flecha-app
+```
 
 
 En futuras actualizaciones se puede utilizar:
 
-bash
+```bash
 git pull
+```
 
 
 sobre una rama previamente validada.
@@ -223,8 +234,9 @@ sobre una rama previamente validada.
 
 En producción se recomienda instalar dependencias sin paquetes de desarrollo:
 
-bash
+```bash
 composer install --no-dev --optimize-autoloader
+```
 
 
 Esto instala las versiones registradas en:
@@ -242,7 +254,7 @@ y evita instalar herramientas utilizadas exclusivamente durante desarrollo.
 Se crea el archivo:
 
 
-.env
+- .env
 
 
 a partir de:
@@ -253,17 +265,19 @@ a partir de:
 
 Ejemplo:
 
-bash
+```bash
 cp .env.example .env
+```
 
 
 Variables importantes:
 
-env
+```env
 APP_NAME=flecha_app
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://dominio-o-direccion
+```
 
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
@@ -275,8 +289,9 @@ DB_PASSWORD=contraseña_segura
 
 En producción:
 
-env
+```env
 APP_DEBUG=false
+```
 
 
 debe permanecer deshabilitado para evitar mostrar información interna de la
@@ -288,14 +303,16 @@ aplicación.
 
 Después de crear el `.env`:
 
-bash
+```bash
 php artisan key:generate
+```
 
 
 Laravel almacena la clave resultante en:
 
-env
+```env
 APP_KEY=
+```
 
 
 La clave no debe compartirse públicamente ni versionarse en Git.
@@ -315,14 +332,14 @@ junto con el usuario autorizado para acceder a ella.
 El usuario utilizado por Laravel debe disponer de los permisos necesarios para:
 
 
-SELECT
-INSERT
-UPDATE
-DELETE
-CREATE
-ALTER
-INDEX
-REFERENCES
+- SELECT
+- INSERT
+- UPDATE
+- DELETE
+- CREATE
+- ALTER
+- INDEX
+- REFERENCES
 
 
 durante la instalación inicial y ejecución de migraciones.
@@ -333,8 +350,9 @@ durante la instalación inicial y ejecución de migraciones.
 
 La estructura de base de datos se crea mediante:
 
-bash
+```bash
 php artisan migrate --force
+```
 
 
 La opción:
@@ -355,8 +373,9 @@ migraciones permite reconstruir la estructura completa en una base limpia.
 
 Si se desean cargar datos iniciales:
 
-bash
+```bash
 php artisan db:seed --force
+```
 
 
 El uso de seeders deberá evaluarse según el ambiente.
@@ -370,14 +389,16 @@ productiva real.
 
 Las dependencias frontend se instalan utilizando:
 
-bash
+```bash
 npm ci
+```
 
 
 Posteriormente:
 
-bash
+```bash
 npm run build
+```
 
 
 `npm ci` utiliza las versiones registradas en:
@@ -390,8 +411,9 @@ lo que ayuda a obtener instalaciones reproducibles.
 
 Una vez compilados los assets, no es necesario mantener:
 
-bash
+```bash
 npm run dev
+```
 
 
 ejecutándose en producción.
@@ -420,24 +442,27 @@ No se recomienda proporcionar permisos globales `777`.
 Después de completar la configuración pueden optimizarse diferentes componentes
 de Laravel:
 
-bash
+```bash
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
+```
 
 
 También puede utilizarse:
 
-bash
+```bash
 php artisan optimize
+```
 
 
 Estas operaciones reducen trabajo realizado durante las solicitudes normales.
 
 Cuando se modifique configuración durante mantenimiento se puede limpiar mediante:
 
-bash
+```bash
 php artisan optimize:clear
+```
 
 
 ---
@@ -453,6 +478,7 @@ flecha-app/public
 El flujo de una solicitud será:
 
 
+```text
 Cliente
    |
    v
@@ -463,12 +489,13 @@ public/index.php
    |
    v
 Laravel
+```
 
 
 El servidor web no debe exponer directamente:
 
 
-.env
+- .env
 vendor/
 storage/
 database/
@@ -484,12 +511,12 @@ Como alternativa de administración del servidor puede utilizarse Virtualmin.
 Virtualmin puede facilitar tareas como:
 
 
-Administración del dominio
-Configuración del servidor web
-Certificados TLS
-Administración del sistema
-Logs
-Bases de datos
+- Administración del dominio
+- Configuración del servidor web
+- Certificados TLS
+- Administración del sistema
+- Logs
+- Bases de datos
 
 
 Sin embargo, Virtualmin funciona únicamente como herramienta de administración.
@@ -506,6 +533,7 @@ En un despliegue accesible públicamente se recomienda utilizar HTTPS.
 El tráfico esperado sería:
 
 
+```text
 Usuario
    |
    | HTTPS
@@ -514,6 +542,7 @@ Servidor Web
    |
    v
 Laravel
+```
 
 
 Esto es especialmente importante porque la aplicación maneja:
@@ -537,8 +566,9 @@ https://dominio/api/books
 
 Las rutas protegidas requieren:
 
-http
+```http
 Authorization: Bearer <token>
+```
 
 
 Laravel Sanctum valida el token antes de permitir el acceso.
@@ -561,8 +591,9 @@ Actualmente el proyecto no depende de carga pública de archivos.
 Si en una evolución futura se incorporaran imágenes, documentos o archivos
 almacenados mediante el disco `public`, sería necesario ejecutar:
 
-bash
+```bash
 php artisan storage:link
+```
 
 
 No se considera obligatorio para las funciones actuales del sistema.
@@ -575,8 +606,9 @@ La funcionalidad actual del sistema no depende de procesamiento asíncrono.
 
 Por lo tanto, no es necesario mantener permanentemente:
 
-bash
+```bash
 php artisan queue:work
+```
 
 
 en el despliegue actual.
@@ -610,6 +642,7 @@ requerimiento que la justifique.
 Un despliegue inicial puede seguir el siguiente flujo:
 
 
+```text
 Repositorio Git
       |
       v
@@ -647,6 +680,7 @@ Optimizar Laravel
       |
       v
 Validar aplicación
+```
 
 
 ---
@@ -656,27 +690,28 @@ Validar aplicación
 Después del despliegue se recomienda comprobar:
 
 
-Página de inicio
-Login
-Dashboard
-Listado de libros
-Creación de libro
-Edición de libro
-Eliminación de libro
-Administración de autores
-Administración de géneros
-Búsqueda
-Paginación
-API protegida
-HTTPS
-Logs
+- Página de inicio
+- Login
+- Dashboard
+- Listado de libros
+- Creación de libro
+- Edición de libro
+- Eliminación de libro
+- Administración de autores
+- Administración de géneros
+- Búsqueda
+- Paginación
+- API protegida
+- HTTPS
+- Logs
 
 
 También deberá verificarse que:
 
-env
+```env
 APP_ENV=production
 APP_DEBUG=false
+```
 
 
 ---
@@ -702,9 +737,9 @@ usuario final.
 En un ambiente productivo real se recomienda respaldar principalmente:
 
 
-PostgreSQL
-.env
-archivos persistentes de usuario
+- PostgreSQL
+- .env
+- archivos persistentes de usuario
 
 
 El código fuente no requiere respaldo manual si se encuentra correctamente
@@ -727,16 +762,19 @@ la información.
 La arquitectura inicial utiliza un único servidor:
 
 
+```text
 ┌─────────────────────┐
 │ Laravel             │
 │ Livewire            │
 │ PostgreSQL          │
 └─────────────────────┘
+```
 
 
 Si el volumen aumentara, la arquitectura podría evolucionar hacia:
 
 
+```text
                   ┌───────────────┐
                   │  Web / App    │
                   │    Server     │
@@ -747,17 +785,18 @@ Si el volumen aumentara, la arquitectura podría evolucionar hacia:
                   │  PostgreSQL   │
                   │    Server     │
                   └───────────────┘
+```
 
 
 Posteriormente también podrían incorporarse:
 
 
-Load Balancer
-Múltiples servidores Laravel
-Redis
-Workers independientes
-CDN
-Base de datos administrada
+- Load Balancer
+- Múltiples servidores Laravel
+- Redis
+- Workers independientes
+- CDN
+- Base de datos administrada
 
 
 Estos componentes no se implementan actualmente porque el alcance y volumen del
@@ -772,8 +811,9 @@ privado y exponerla únicamente durante el período necesario.
 
 En desarrollo local:
 
-bash
+```bash
 composer run dev
+```
 
 
 puede iniciar los servicios necesarios para trabajar con la aplicación.
@@ -794,6 +834,7 @@ El diseño actual no impide distribuir los componentes posteriormente.
 Por ejemplo:
 
 
+```text
                   Internet
                      |
                      v
@@ -807,6 +848,7 @@ Por ejemplo:
              ┌──────────────┐
              │ PostgreSQL   │
              └──────────────┘
+```
 
 
 Incluso un frontend independiente podría consumir:

@@ -9,459 +9,514 @@ responsabilidades, entradas y salidas.
 
 ## 2. BookController
 
-**Ubicación**
+### Ubicación
 
 
-app/Http/Controllers/BookController.php
+`app/Http/Controllers/BookController.php`
 
-Responsabilidad
+### Responsabilidad
 
 Gestionar las operaciones HTTP de la API REST relacionadas con libros.
 
-Operaciones
-Método	Entrada	Salida
-index()	Parámetro opcional search	Listado paginado de libros
-store()	Datos validados de libro	Libro creado, HTTP 201
-show()	Libro obtenido mediante Route Model Binding	Detalle del libro
-update()	Libro + datos validados	Libro actualizado
-destroy()	Libro	HTTP 204
-Entradas principales
-title
-author_id
-genre_id
-publication_year
-description
+### Operaciones
+
+| Método | Entrada | Salida |
+|---|---|---|
+| `index()` | Parámetro opcional `search` | Listado paginado de libros |
+| `store()` | Datos validados de libro | Libro creado, HTTP 201 |
+| `show()` | Libro obtenido mediante Route Model Binding | Detalle del libro |
+| `update()` | Libro + datos validados | Libro actualizado |
+| `destroy()` | Libro | HTTP 204 |
+
+### Entradas principales
+
+- title
+- author_id
+- genre_id
+- publication_year
+- description
 
 El campo book_code no es aceptado desde el cliente.
 
-Salidas
+### Salidas
 
 Las respuestas de libros incluyen sus relaciones:
 
-author
-genre
-3. AuthorController
+- author
+- genre
 
-Ubicación
+## 3. AuthorController
 
-app/Http/Controllers/AuthorController.php
+### Ubicación
 
-Responsabilidad
+`app/Http/Controllers/AuthorController.php`
+
+### Responsabilidad
 
 Proporcionar el catálogo de autores mediante la API.
 
-Entrada
+### Entrada
 
 No requiere parámetros.
 
-Salida
+### Salida
 
 Colección de autores ordenados por nombre.
 
-4. GenreController
+## 4. GenreController
 
-Ubicación
+### Ubicación
 
-app/Http/Controllers/GenreController.php
+`app/Http/Controllers/GenreController.php`
 
-Responsabilidad
+### Responsabilidad
 
 Proporcionar el catálogo de géneros mediante la API.
 
-Entrada
+### Entrada
 
 No requiere parámetros.
 
-Salida
+### Salida
 
 Colección de géneros ordenados por nombre.
 
-5. StoreBookRequest
+## 5. StoreBookRequest
 
-Ubicación
+### Ubicación
 
-app/Http/Requests/StoreBookRequest.php
+`app/Http/Requests/StoreBookRequest.php`
 
-Responsabilidad
+### Responsabilidad
 
 Validar los datos recibidos al registrar un nuevo libro mediante la API.
 
-Entrada
+### Entrada
 
 Solicitud HTTP con los datos del libro.
 
-Salida
-Datos validados si la solicitud es correcta.
-HTTP 422 Unprocessable Entity si existen errores de validación.
+### Salida
+
+- Datos validados si la solicitud es correcta.
+- HTTP 422 Unprocessable Entity si existen errores de validación.
 
 Las reglas se obtienen desde:
 
-App\Support\BookValidationRules
-6. UpdateBookRequest
+`App\Support\BookValidationRules`
 
-Ubicación
+## 6. UpdateBookRequest
 
-app/Http/Requests/UpdateBookRequest.php
+### Ubicación
 
-Responsabilidad
+`app/Http/Requests/UpdateBookRequest.php`
+
+### Responsabilidad
 
 Validar los datos recibidos durante la actualización de un libro.
 
-Entrada
+### Entrada
 
 Solicitud HTTP con los nuevos datos del libro.
 
-Salida
-Datos validados.
-HTTP 422 cuando existen errores.
+### Salida
+
+- Datos validados.
+- HTTP 422 cuando existen errores.
 
 El identificador book_code no puede ser modificado mediante esta operación.
 
-7. BookValidationRules
+## 7. BookValidationRules
 
-Ubicación
+### Ubicación
 
-app/Support/BookValidationRules.php
+`app/Support/BookValidationRules.php`
 
-Responsabilidad
+### Responsabilidad
 
 Centralizar las reglas utilizadas para validar libros.
 
-Entrada
+### Entrada
 
 Datos asociados a:
 
-title
-author_id
-genre_id
-publication_year
-description
-Salida
+- title
+- author_id
+- genre_id
+- publication_year
+- description
+
+### Salida
 
 Arreglo de reglas de validación compatible con Laravel.
 
-Consumidores
-StoreBookRequest
-UpdateBookRequest
-Livewire Books
-8. AuthorValidationRules
+### Consumidores
 
-Ubicación
+- StoreBookRequest
+- UpdateBookRequest
+- Livewire Books
 
-app/Support/AuthorValidationRules.php
+## 8. AuthorValidationRules
 
-Responsabilidad
+### Ubicación
+
+`app/Support/AuthorValidationRules.php`
+
+### Responsabilidad
 
 Centralizar la validación de autores.
 
-Entrada
-name
-authorId opcional
+### Entrada
+
+- name
+- authorId opcional
 
 El identificador opcional se utiliza durante actualización para excluir al
 registro actual de la validación de unicidad.
 
-Salida
+### Salida
 
 Reglas de validación de Laravel.
 
-9. GenreValidationRules
+## 9. GenreValidationRules
 
-Ubicación
+### Ubicación
 
-app/Support/GenreValidationRules.php
+`app/Support/GenreValidationRules.php`
 
-Responsabilidad
+### Responsabilidad
 
 Centralizar la validación de géneros.
 
-Entrada
-name
-genreId opcional
-Salida
+### Entrada
+
+- name
+- genreId opcional
+
+### Salida
 
 Reglas de validación de Laravel.
 
-10. BookCodeGenerator
+## 10. BookCodeGenerator
 
-Ubicación
+### Ubicación
 
-app/Services/BookCodeGenerator.php
+`app/Services/BookCodeGenerator.php`
 
-Responsabilidad
+### Responsabilidad
 
 Generar el identificador único solicitado para cada libro.
 
-Entrada
+### Entrada
 
 No requiere parámetros externos.
 
-Proceso
-Genera una letra aleatoria entre A y Z.
-Genera un número aleatorio entre 00 y 99.
-Forma un código de tres caracteres.
-Consulta si el código ya existe.
-Si existe, genera uno nuevo.
-Salida
+### Proceso
+
+- Genera una letra aleatoria entre A y Z.
+- Genera un número aleatorio entre 00 y 99.
+- Forma un código de tres caracteres.
+- Consulta si el código ya existe.
+- Si existe, genera uno nuevo.
+
+### Salida
 
 Cadena con formato:
 
+```text
 A12
 B04
 Z99
-Consideración
+```
+
+### Consideración
 
 La restricción UNIQUE de PostgreSQL constituye la garantía final de unicidad
 ante posibles condiciones de concurrencia.
 
-11. Modelo Book
+## 11. Modelo Book
 
-Ubicación
+### Ubicación
 
-app/Models/Book.php
+`app/Models/Book.php`
 
-Responsabilidad
+### Responsabilidad
 
 Representar la entidad libro y sus relaciones.
 
-Entradas persistibles
-book_code
-title
-author_id
-genre_id
-publication_year
-description
+### Entradas persistibles
+
+- book_code
+- title
+- author_id
+- genre_id
+- publication_year
+- description
 
 is_active no se encuentra habilitado para asignación masiva.
 
-Relaciones
-Book belongsTo Author
-Book belongsTo Genre
-Consulta reutilizable
+### Relaciones
+
+- Book belongsTo Author
+- Book belongsTo Genre
+
+### Consulta reutilizable
 
 El scope:
 
-search()
+`search()`
 
 permite buscar por:
 
-Título.
-Autor.
-Género.
-Salida
+- Título.
+- Autor.
+- Género.
+
+### Salida
 
 Instancias Eloquent de Book y consultas asociadas.
 
-12. Modelo Author
+## 12. Modelo Author
 
-Ubicación
+### Ubicación
 
-app/Models/Author.php
+`app/Models/Author.php`
 
-Responsabilidad
+### Responsabilidad
 
 Representar autores.
 
-Entrada
-name
-Procesamiento
+### Entrada
+
+- name
+
+### Procesamiento
 
 El atributo name se normaliza antes de almacenarse:
 
-Se eliminan espacios innecesarios.
-Se aplica formato Title Case.
-Relación
-Author hasMany Books
-Salida
+- Se eliminan espacios innecesarios.
+- Se aplica formato Title Case.
+
+### Relación
+
+- Author hasMany Books
+
+### Salida
 
 Instancias Eloquent de Author.
 
-13. Modelo Genre
+## 13. Modelo Genre
 
-Ubicación
+### Ubicación
 
-app/Models/Genre.php
+`app/Models/Genre.php`
 
-Responsabilidad
+### Responsabilidad
 
 Representar géneros.
 
-Entrada
-name
-Procesamiento
+### Entrada
+
+- name
+
+### Procesamiento
 
 El nombre se normaliza antes del almacenamiento.
 
-Relación
-Genre hasMany Books
-Salida
+### Relación
+
+- Genre hasMany Books
+
+### Salida
 
 Instancias Eloquent de Genre.
 
-14. Componente Livewire Books
+## 14. Componente Livewire Books
 
-Ubicación
+### Ubicación
 
-resources/views/components/books/⚡index.blade.php
+`resources/views/components/books/⚡index.blade.php`
 
-Responsabilidad
+### Responsabilidad
 
 Gestionar la interfaz administrativa de libros.
 
-Entradas del usuario
-search
-title
-author_id
-genre_id
-publication_year
-description
-Acciones
-save()
-edit()
-delete()
-cancelEdit()
-updatedSearch()
-Salidas
-Listado paginado de libros.
-Resultados de búsqueda.
-Mensajes de validación.
-Mensajes de éxito.
-Actualización dinámica de la interfaz.
-15. Componente Livewire Authors
+### Entradas del usuario
 
-Ubicación
+- search
+- title
+- author_id
+- genre_id
+- publication_year
+- description
 
-resources/views/components/authors/⚡index.blade.php
+### Acciones
 
-Responsabilidad
+- save()
+- edit()
+- delete()
+- cancelEdit()
+- updatedSearch()
+
+### Salidas
+
+- Listado paginado de libros.
+- Resultados de búsqueda.
+- Mensajes de validación.
+- Mensajes de éxito.
+- Actualización dinámica de la interfaz.
+
+## 15. Componente Livewire Authors
+
+### Ubicación
+
+`resources/views/components/authors/⚡index.blade.php`
+
+### Responsabilidad
 
 Gestionar autores desde la interfaz web.
 
-Entradas
-search
-name
-Acciones
-save()
-edit()
-delete()
-cancelEdit()
-Regla de negocio
+### Entradas
+
+- search
+- name
+
+### Acciones
+
+- save()
+- edit()
+- delete()
+- cancelEdit()
+
+### Regla de negocio
 
 Antes de eliminar un autor se verifica:
 
-author->books()->exists()
+`author->books()->exists()`
 
 Si existen libros relacionados, la eliminación se rechaza.
 
-Salidas
-Lista paginada.
-Resultados de búsqueda.
-Mensajes de éxito/error.
-Validaciones.
-16. Componente Livewire Genres
+### Salidas
 
-Ubicación
+- Lista paginada.
+- Resultados de búsqueda.
+- Mensajes de éxito/error.
+- Validaciones.
 
-resources/views/components/genres/⚡index.blade.php
+## 16. Componente Livewire Genres
 
-Responsabilidad
+### Ubicación
+
+`resources/views/components/genres/⚡index.blade.php`
+
+### Responsabilidad
 
 Gestionar géneros desde la interfaz web.
 
-Entradas
-search
-name
-Acciones
-save()
-edit()
-delete()
-cancelEdit()
-Regla de negocio
+### Entradas
+
+- search
+- name
+
+### Acciones
+
+- save()
+- edit()
+- delete()
+- cancelEdit()
+
+### Regla de negocio
 
 Un género no puede eliminarse mientras tenga libros asociados.
 
-Salidas
-Lista paginada.
-Resultados de búsqueda.
-Validaciones.
-Mensajes de éxito/error.
-17. Laravel Sanctum
+### Salidas
 
-Responsabilidad
+- Lista paginada.
+- Resultados de búsqueda.
+- Validaciones.
+- Mensajes de éxito/error.
+
+## 17. Laravel Sanctum
+
+### Responsabilidad
 
 Autenticar consumidores de la API REST.
 
-Entrada
+### Entrada
 
 Token enviado como:
 
-Authorization: Bearer <token>
-Salida
-Solicitud autorizada si el token es válido.
-HTTP 401 Unauthorized si no existe autenticación válida.
-18. PostgreSQL
+`Authorization: Bearer <token>`
 
-Responsabilidad
+### Salida
+
+- Solicitud autorizada si el token es válido.
+- HTTP 401 Unauthorized si no existe autenticación válida.
+
+## 18. PostgreSQL
+
+### Responsabilidad
 
 Persistir la información y garantizar integridad de datos.
 
-Entradas
+### Entradas
 
 Operaciones generadas desde Eloquent:
 
-SELECT
-INSERT
-UPDATE
-DELETE
-Salidas
+- SELECT
+- INSERT
+- UPDATE
+- DELETE
+
+### Salidas
 
 Registros persistidos o resultados de consultas.
 
-Garantías
+### Garantías
 
 PostgreSQL mantiene:
 
-Llaves primarias.
-Llaves foráneas.
-Restricciones UNIQUE.
-Integridad referencial.
-Restricciones NOT NULL.
-19. Vite / Tailwind CSS
+- Llaves primarias.
+- Llaves foráneas.
+- Restricciones UNIQUE.
+- Integridad referencial.
+- Restricciones NOT NULL.
 
-Responsabilidad
+## 19. Vite / Tailwind CSS
+
+### Responsabilidad
 
 Gestionar y compilar los recursos frontend.
 
-Entrada
+### Entrada
 
 Archivos CSS y recursos del proyecto.
 
-Salida
+### Salida
 
 Assets optimizados para ejecución en navegador.
 
 El proceso de compilación se ejecuta mediante:
 
-npm run build
-20. Pest / PHPUnit
+`npm run build`
 
-Responsabilidad
+## 20. Pest / PHPUnit
+
+### Responsabilidad
 
 Ejecutar las pruebas automatizadas de la aplicación.
 
-Entrada
-
+### Entrada
+v
 Suite de pruebas ubicada en:
 
-tests/
-Salida
+`tests/`
+
+### Salida
 
 Resultado de ejecución y cantidad de assertions verificadas.
 
 La suite se ejecuta mediante:
 
-php artisan test
+`php artisan test`
 
 Actualmente se encuentran implementadas 53 pruebas satisfactorias.
-
-

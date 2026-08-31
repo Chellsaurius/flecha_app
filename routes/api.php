@@ -11,12 +11,17 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/books', [BookController::class, 'store']);
-    Route::get('/books', [BookController::class, 'index']);
-    Route::get('/books/{book}', [BookController::class, 'show']);
-    Route::put('/books/{book}', [BookController::class, 'update']);
-    Route::delete('/books/{book}', [BookController::class, 'destroy']);
+    // Route::post('/books', [BookController::class, 'store']);
+    // Route::get('/books', [BookController::class, 'index']);
+    // Route::get('/books/{book}', [BookController::class, 'show']);
+    // Route::put('/books/{book}', [BookController::class, 'update']);
+    // Route::delete('/books/{book}', [BookController::class, 'destroy']);
 
-    Route::get('/authors', [AuthorController::class, 'index']);
-    Route::get('/genres', [GenreController::class, 'index']);
+    // Route::get('/authors', [AuthorController::class, 'index']);
+    // Route::get('/genres', [GenreController::class, 'index']);
+    // antigua forma de hacer las apis, ahora en laravel con esto que sigue ya tienes todo
+
+    Route::apiResource('books', BookController::class);
+    Route::apiResource('authors', AuthorController::class);
+    Route::apiResource('genres', GenreController::class);
 });

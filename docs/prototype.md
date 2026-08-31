@@ -38,18 +38,20 @@ Ajustes visuales
       |
       v
 Interfaz final
+```
 
 Este enfoque permitió validar simultáneamente:
 
-Navegación.
-Formularios.
-Búsquedas.
-Paginación.
-Validaciones.
-Mensajes.
-Acciones CRUD.
-Integración con datos reales.
-3. Dashboard
+- Navegación.
+- Formularios.
+- Búsquedas.
+- Paginación.
+- Validaciones.
+- Mensajes.
+- Acciones CRUD.
+- Integración con datos reales.
+
+## 3. Dashboard
 
 El Dashboard funciona como punto de entrada al sistema.
 
@@ -57,123 +59,138 @@ Presenta una breve descripción del proyecto y acceso directo al módulo de libr
 
 Características principales:
 
-Navegación lateral.
-Soporte para modo claro y oscuro.
-Acceso a los principales módulos.
-Resumen del propósito de la aplicación.
-Evidencia
+- Navegación lateral.
+- Soporte para modo claro y oscuro.
+- Acceso a los principales módulos.
+- Resumen del propósito de la aplicación.
 
-4. Administración de libros
+### Evidencia
+
+![Dashboard](screenshots/dashboard.png)
+
+## 4. Administración de libros
 
 El módulo de libros permite realizar el CRUD principal de la aplicación.
 
 La pantalla incluye:
 
-Formulario de creación.
-Formulario reutilizable para edición.
-Selección de autor.
-Selección de género.
-Año de publicación.
-Descripción.
-Buscador.
-Tabla de resultados.
-Paginación.
-Acciones de edición y eliminación.
-Confirmación antes de eliminar.
-Mensajes de éxito y validación.
-Evidencia
+- Formulario de creación.
+- Formulario reutilizable para edición.
+- Selección de autor.
+- Selección de género.
+- Año de publicación.
+- Descripción.
+- Buscador.
+- Tabla de resultados.
+- Paginación.
+- Acciones de edición y eliminación.
+- Confirmación antes de eliminar.
+- Mensajes de éxito y validación.
 
-5. Creación y edición de libros
+### Evidencia
+
+![Administración de libros](screenshots/libros.png)
+
+## 5. Creación y edición de libros
 
 El mismo formulario es utilizado tanto para crear como para actualizar registros.
 
 En modo creación se muestra:
 
-Nuevo libro
+`Nuevo libro`
 
 y en modo edición:
 
-Editar libro
+`Editar libro`
 
 El código único del libro no es editable por el usuario.
 
 El sistema lo genera automáticamente cuando se registra el libro.
 
-Evidencia
+### Evidencia
 
-6. Administración de autores
+![Edición de libros](screenshots/libros%20editar.png)
+
+## 6. Administración de autores
 
 El módulo de autores permite:
 
-Crear autores.
-Buscar autores.
-Editar autores.
-Eliminar autores sin relaciones activas.
-Mostrar mensajes de error cuando existen libros asociados.
+- Crear autores.
+- Buscar autores.
+- Editar autores.
+- Eliminar autores sin relaciones activas.
+- Mostrar mensajes de error cuando existen libros asociados.
 
 Los nombres se normalizan automáticamente antes de almacenarse.
 
-Evidencia
+### Evidencia
 
-7. Administración de géneros
+![Administración de autores](screenshots/autores.png)
+
+## 7. Administración de géneros
 
 El módulo de géneros mantiene una interfaz consistente con el módulo de autores.
 
 Permite:
 
-Crear.
-Buscar.
-Editar.
-Eliminar.
+- Crear.
+- Buscar.
+- Editar.
+- Eliminar.
 
 La eliminación se rechaza cuando existen libros relacionados.
 
-Evidencia
+### Evidencia
 
-8. Navegación
+![Administración de géneros](screenshots/generos.png)
+
+## 8. Navegación
 
 La aplicación utiliza navegación lateral para acceder a:
 
-Dashboard
-Libros
-Autores
-Géneros
+- Dashboard
+- Libros
+- Autores
+- Géneros
 
 El elemento correspondiente a la ruta actual se muestra como activo.
 
 Livewire utiliza navegación dinámica mediante:
 
-wire:navigate
+`wire:navigate`
 
 reduciendo las recargas completas de página durante la navegación.
 
-9. Diseño responsivo y temas
+## 9. Diseño responsivo y temas
 
 La interfaz utiliza Tailwind CSS y los componentes proporcionados por el starter
 kit.
 
 Se consideraron:
 
-Modo claro.
-Modo oscuro.
-Contraste de textos.
-Tablas con desplazamiento horizontal cuando sea necesario.
-Separación visual entre formularios y resultados.
-Retroalimentación visual para acciones.
-10. Validaciones visuales
+- Modo claro.
+- Modo oscuro.
+- Contraste de textos.
+- Tablas con desplazamiento horizontal cuando sea necesario.
+- Separación visual entre formularios y resultados.
+- Retroalimentación visual para acciones.
+
+## 10. Validaciones visuales
 
 Los errores de formulario se presentan directamente debajo del campo
 correspondiente.
 
 Ejemplo:
 
+```text
 Título
 [                     ]
 El campo título es obligatorio.
+```
 
 Esto permite identificar rápidamente qué información debe corregirse.
 
-11. Confirmación de eliminación
+## 11. Confirmación de eliminación
 
 Las acciones destructivas solicitan confirmación antes de ejecutarse.
 
@@ -183,25 +200,27 @@ Ejemplo:
 
 La confirmación reduce el riesgo de eliminación accidental.
 
-12. Mensajes de resultado
+## 12. Mensajes de resultado
 
 Después de operaciones satisfactorias se muestran mensajes como:
 
-Libro creado correctamente.
-Libro actualizado correctamente.
-Libro eliminado correctamente.
-Autor creado correctamente.
-Género actualizado correctamente.
+- Libro creado correctamente.
+- Libro actualizado correctamente.
+- Libro eliminado correctamente.
+- Autor creado correctamente.
+- Género actualizado correctamente.
 
 También se muestran mensajes de error para reglas como:
 
-No se puede eliminar el autor porque tiene libros asociados.
-13. Consistencia visual
+- No se puede eliminar el autor porque tiene libros asociados.
+
+## 13. Consistencia visual
 
 Los módulos de libros, autores y géneros siguen patrones visuales similares.
 
 Esto permite que el usuario reconozca rápidamente:
 
+```text
 Formulario
       |
       v
@@ -212,23 +231,24 @@ Tabla
       |
       v
 Acciones
+```
 
 La consistencia reduce la curva de aprendizaje entre módulos.
 
-14. Resultado del prototipo
+## 14. Resultado del prototipo
 
 El prototipo evolucionó hasta convertirse en una implementación funcional.
 
 Actualmente permite validar directamente:
 
-Flujo de navegación.
-Registro de datos.
-Edición.
-Eliminación.
-Búsqueda.
-Validaciones.
-Restricciones de negocio.
-Persistencia en PostgreSQL.
+- Flujo de navegación.
+- Registro de datos.
+- Edición.
+- Eliminación.
+- Búsqueda.
+- Validaciones.
+- Restricciones de negocio.
+- Persistencia en PostgreSQL.
 
 Por esta razón, las capturas incluidas representan el prototipo final funcional
 y no únicamente una maqueta estática.
